@@ -9,7 +9,6 @@ CREATE TABLE members (
     created_at DATETIME not null,
     update_at DATETIME not null,
     is_deleted TINYINT(1) DEFAULT 0 
-
 )ENGINE=InnoDB;
 
 CREATE TABLE entries(
@@ -17,7 +16,6 @@ CREATE TABLE entries(
     user_id INT not null REFERENCES members (id),
     chatroom_id INT not null REFERENCES chatrooms (id),
     entried_at DATETIME not null
-    
 )ENGINE=InnoDB;;
 
 CREATE TABLE chats(
@@ -32,7 +30,6 @@ CREATE TABLE chats(
     is_deleted TINYINT(1) DEFAULT 0,
     FOREIGN KEY(chat_user_id,update_user_id) REFERENCES members (id),
     FOREIGN KEY(chatroom_id) REFERENCES chatrooms(id)
-
 )ENGINE=InnoDB;;
 
 CREATE TABLE tasks(
@@ -49,7 +46,6 @@ CREATE TABLE tasks(
     is_deleted TINYINT(1) DEFAULT 0,
     FOREIGN KEY(task_user_id,create_user_id,update_user_id) REFERENCES members (id),
     FOREIGN KEY(chatroom_id) REFERENCES chatrooms(id)
-
 )ENGINE=InnoDB;;
 
 CREATE TABLE chatrooms(
@@ -64,5 +60,4 @@ CREATE TABLE chatrooms(
     update_at DATETIME not null,
     is_deleted TINYINT(1) DEFAULT 0,
     FOREIGN KEY(create_user_id,update_user_id) REFERENCES members (id)
-
 )ENGINE=InnoDB;;
