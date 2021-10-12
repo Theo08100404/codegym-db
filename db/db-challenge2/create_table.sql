@@ -1,3 +1,8 @@
+CREATE DATABASE db_kadai;
+
+USE db_kadai;
+
+
 CREATE TABLE members (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_name VARCHAR(100) not null,
@@ -16,37 +21,33 @@ CREATE TABLE entries(
     user_id INT not null REFERENCES members (id),
     chatroom_id INT not null REFERENCES chatrooms (id),
     entried_at DATETIME not null
-)ENGINE=InnoDB;;
+)ENGINE=InnoDB;
 
 CREATE TABLE chats(
     id INT PRIMARY KEY AUTO_INCREMENT,
     chat VARCHAR(1000) not null,
     file_name VARCHAR(100),
-    chat_user_id INT not null,
-    chatroom_id INT not null,
+    chat_user_id INT not null REFERENCES members (id),
+    chatroom_id INT not null REFERENCES chatrooms(id),
     chated_at DATETIME not null,
-    update_user_id INT not null,
+    update_user_id INT not null REFERENCES members (id),
     update_at DATETIME,
-    is_deleted TINYINT(1) DEFAULT 0,
-    FOREIGN KEY(chat_user_id,update_user_id) REFERENCES members (id),
-    FOREIGN KEY(chatroom_id) REFERENCES chatrooms(id)
-)ENGINE=InnoDB;;
+    is_deleted TINYINT(1) DEFAULT 0
+)ENGINE=InnoDB;
 
 CREATE TABLE tasks(
     id INT PRIMARY KEY AUTO_INCREMENT,
     task VARCHAR(1000) not null,
-    task_user_id INT not null,
-    chatroom_id INT not null,
+    task_user_id INT not null REFERENCES members (id),
+    chatroom_id INT not null REFERENCES chatrooms (id),
     deadline DATETIME,
     is_finished TINYINT(1) DEFAULT 0,
-    create_user_id INT not null,
+    create_user_id INT not null REFERENCES members (id),
     created_at DATETIME not null,
-    update_user_id INT not null,
+    update_user_id INT not null REFERENCES members (id),
     update_at DATETIME not null,
-    is_deleted TINYINT(1) DEFAULT 0,
-    FOREIGN KEY(task_user_id,create_user_id,update_user_id) REFERENCES members (id),
-    FOREIGN KEY(chatroom_id) REFERENCES chatrooms(id)
-)ENGINE=InnoDB;;
+    is_deleted TINYINT(1) DEFAULT 0
+)ENGINE=InnoDB;
 
 CREATE TABLE chatrooms(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -54,10 +55,9 @@ CREATE TABLE chatrooms(
     description VARCHAR(1000),
     file_flag TINYINT(1) DEFAULT 1,
     direct_flag TINYINT(1) DEFAULT 0,
-    create_user_id INT not null,
+    create_user_id INT not null REFERENCES members (id),
     created_at DATETIME not null,
-    update_user_id INT not null, 
+    update_user_id INT not null REFERENCES members (id), 
     update_at DATETIME not null,
-    is_deleted TINYINT(1) DEFAULT 0,
-    FOREIGN KEY(create_user_id,update_user_id) REFERENCES members (id)
-)ENGINE=InnoDB;;
+    is_deleted TINYINT(1) DEFAULT 0
+)ENGINE=InnoDB;
