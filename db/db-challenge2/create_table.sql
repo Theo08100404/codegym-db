@@ -23,7 +23,7 @@ CREATE TABLE chatrooms(
     created_at DATETIME not null,
     update_user_id INT not null ,
     updated_at DATETIME not null,
-    is_deleted TINYINT(1) DEFAULT 0 not null
+    is_deleted TINYINT(1) DEFAULT 0 not null,
     FOREIGN KEY (create_user_id) REFERENCES members(id),
     FOREIGN KEY (update_user_id) REFERENCES members(id)
 )ENGINE=InnoDB , DEFAULT CHARSET=utf8;
