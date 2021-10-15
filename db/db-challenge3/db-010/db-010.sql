@@ -9,4 +9,5 @@ AND chatsA.created_at = chatsB.最新投稿
 JOIN members 
 ON chatsA.chat_user_id = members.id 
 JOIN chatrooms ON chatsA.chatroom_id = chatrooms.id 
-WHERE members.is_deleted <> 1 ORDER BY chatrooms.id;
+WHERE members.is_deleted <> 1 
+ORDER BY chatrooms.id;
