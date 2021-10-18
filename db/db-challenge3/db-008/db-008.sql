@@ -5,4 +5,4 @@ ON entries.user_id = members.id
 JOIN chatrooms
 ON entries.chatroom_id = chatrooms.id
 WHERE members.is_deleted <> 1 AND chatrooms.is_deleted <> 1
-ORDER BY 参加日時;
+ORDER BY entries.created_at;
